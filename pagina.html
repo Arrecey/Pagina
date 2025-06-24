@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Feliz cumple priss</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+    body {
+      background: #fff0f5;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: linear-gradient(135deg, #f9d5e5, #f06c9b);
+      color: white;
+    }
+
+    header h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4em;
+      margin: 0 0 10px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    header p {
+      font-size: 1.6em;
+      font-weight: 500;
+      max-width: 600px;
+      margin: 0 auto;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 40px auto 60px;
+      padding: 0 20px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery figure {
+      margin: 0;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(240,108,155,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(240,108,155,0.7);
+    }
+
+    .gallery figcaption {
+      margin-top: 8px;
+      font-size: 1em;
+      color: #a72c59;
+      text-align: center;
+      font-style: italic;
+    }
+
+    #overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      z-index: 10000;
+    }
+
+    #countdown {
+      font-size: 2em;
+    }
+
+    #openBtn {
+      display: none;
+      margin-top: 30px;
+      padding: 20px 40px;
+      font-size: 1.5em;
+      background-color: #f06c9b;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+
+    #heartCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      z-index: 10001;
+      display: none;
+    }
+
+    #heartMessage {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Great Vibes', cursive;
+      font-size: 4em;
+      color: white;
+      z-index: 10002;
+      display: none;
+      animation: fadeIn 3s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div id="overlay">
+    <div id="countContainer">
+      <div>Faltan para el gran día:</div>
+      <div id="countdown">00d 00h 00m 00s</div>
+    </div>
+    <button id="openBtn">🎁 Abrir 🎁</button>
+  </div>
+
+  <canvas id="heartCanvas"></canvas>
+  <div id="heartMessage">Happy Birthday Priss 💖</div>
+
+  <header>
+    <h1>Feliz cumple priss</h1>
+    <p>Eres lo mejor que me pasó en la vida, te mereces todo 😊</p>
+  </header>
+
+  <main style="display: none;">
+    <section class="gallery">
+      <figure><img src="foto1.jpeg" alt="Foto 1" /><figcaption>Un día especial</figcaption></figure>
+      <figure><img src="foto2.jpeg" alt="Foto 2" /><figcaption>Momentos únicos</figcaption></figure>
+      <figure><img src="foto3.jpeg" alt="Foto 3" /><figcaption>Recuerdo feliz</figcaption></figure>
+      <figure><img src="foto4.jpeg" alt="Foto 4" /><figcaption>Instante mágico</figcaption></figure>
+      <figure><img src="foto5.jpeg" alt="Foto 5" /><figcaption>Siempre juntos</figcaption></figure>
+      <figure><img src="foto6.jpeg" alt="Foto 6" /><figcaption>Sonrisas tuyas</figcaption></figure>
+      <figure><img src="foto7.jpeg" alt="Foto 7" /><figcaption>Tu ternura</figcaption></figure>
+      <figure><img src="foto8.jpeg" alt="Foto 8" /><figcaption>Mirada que enamora</figcaption></figure>
+      <figure><img src="foto9.jpeg" alt="Foto 9" /><figcaption>Besos eternos</figcaption></figure>
+      <figure><img src="foto10.jpeg" alt="Foto 10" /><figcaption>Abrazos que curan</figcaption></figure>
+      <figure><img src="foto11.jpeg" alt="Foto 11" /><figcaption>Nuestra historia</figcaption></figure>
+      <figure><img src="foto12.jpeg" alt="Foto 12" /><figcaption>Día inolvidable</figcaption></figure>
+      <figure><img src="foto13.jpeg" alt="Foto 13" /><figcaption>Te pienso</figcaption></figure>
+      <figure><img src="foto14.jpeg" alt="Foto 14" /><figcaption>Sonreí siempre</figcaption></figure>
+      <figure><img src="foto15.jpeg" alt="Foto 15" /><figcaption>Contigo todo</figcaption></figure>
+      <figure><img src="foto16.jpeg" alt="Foto 16" /><figcaption>Mi persona favorita</figcaption></figure>
+      <figure><img src="foto17.jpeg" alt="Foto 17" /><figcaption>Viaje juntos</figcaption></figure>
+      <figure><img src="foto18.jpeg" alt="Foto 18" /><figcaption>Amor eterno</figcaption></figure>
+      <figure><img src="foto19.jpeg" alt="Foto 19" /><figcaption>Tu risa</figcaption></figure>
+      <figure><img src="foto20.jpeg" alt="Foto 20" /><figcaption>Detalle tuyo</figcaption></figure>
+      <figure><img src="foto21.jpeg" alt="Foto 21" /><figcaption>Te extraño</figcaption></figure>
+      <figure><img src="foto22.jpeg" alt="Foto 22" /><figcaption>Contigo es mejor</figcaption></figure>
+      <figure><img src="foto23.jpeg" alt="Foto 23" /><figcaption>Felicidad pura</figcaption></figure>
+      <figure><img src="foto24.jpeg" alt="Foto 24" /><figcaption>Inspiración</figcaption></figure>
+      <figure><img src="foto25.jpeg" alt="Foto 25" /><figcaption>Todo por ti</figcaption></figure>
+      <figure><img src="foto26.jpeg" alt="Foto 26" /><figcaption>Te amo</figcaption></figure>
+    </section>
+  </main>
+
+  <script>
+    const targetDate = new Date("2025-06-24T11:13:00");
+    const countdownEl = document.getElementById("countdown");
+    const overlay = document.getElementById("overlay");
+    const openBtn = document.getElementById("openBtn");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+      if (diff <= 0) {
+        document.getElementById("countContainer")?.remove();
+        openBtn.style.display = "block";
+        return;
+      }
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+      countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    let animationId;
+    let exploding = false;
+    const particles = [];
+    const maxParticles = 300;
+
+    openBtn.onclick = () => {
+      showHeartExplosion();
+      openBtn.style.display = 'none';
+
+      // Explota 1 segundo antes de terminar (a los 9 seg)
+      setTimeout(() => {
+        exploding = true;
+        particles.forEach(p => {
+          p.speedX = (Math.random() - 0.5) * 15;
+          p.speedY = (Math.random() - 0.5) * 15;
+        });
+      }, 9000);
+
+      setTimeout(() => {
+        if (animationId) {
+          cancelAnimationFrame(animationId);
+        }
+        document.getElementById('heartCanvas').style.display = 'none';
+        document.getElementById('heartMessage').style.display = 'none';
+        overlay.style.display = 'none';
+        document.querySelector('main').style.display = 'block';
+      }, 10000);
+    };
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    const canvas = document.getElementById('heartCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const heart = (t) => {
+      const x = 16 * Math.pow(Math.sin(t), 3);
+      const y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t)
+                - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+      return { x, y };
+    };
+
+    function Particle(x, y) {
+      this.x = x;
+      this.y = y;
+      this.size = Math.random() * 3 + 1;
+      this.speedX = Math.random() * 2 - 1;
+      this.speedY = Math.random() * 2 - 1;
+      this.alpha = 1;
+    }
+    Particle.prototype.update = function() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      this.alpha -= 0.01;
+    };
+    Particle.prototype.draw = function(ctx) {
+      ctx.globalAlpha = this.alpha;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = "cyan";
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    };
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (!exploding && particles.length < maxParticles) {
+        for (let i = 0; i < 3; i++) {
+          const t = Math.random() * Math.PI * 2;
+          const pos = heart(t);
+          particles.push(new Particle(
+            canvas.width / 2 + pos.x * 10,
+            canvas.height / 2 + pos.y * 10
+          ));
+        }
+      }
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw(ctx);
+      }
+      for (let i = particles.length - 1; i >= 0; i--) {
+        if (particles[i].alpha <= 0) {
+          particles.splice(i, 1);
+        }
+      }
+      if (particles.length > 0) {
+        animationId = requestAnimationFrame(animateParticles);
+      } else {
+        document.getElementById('heartCanvas').style.display = 'none';
+        document.getElementById('heartMessage').style.display = 'none';
+      }
+    }
+
+    function showHeartExplosion() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      exploding = false;
+      particles.length = 0; // Limpiar partículas
+      document.getElementById('heartCanvas').style.display = 'block';
+      document.getElementById('heartMessage').style.display = 'block';
+      animateParticles();
+    }
+  </script>
+</body>
+</html>
