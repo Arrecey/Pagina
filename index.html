@@ -167,6 +167,7 @@
       <div id="countdown">00d 00h 00m 00s</div>
     </div>
     <button id="openBtn">🎁 Abrir 🎁</button>
+    <audio id="bgMusic" src="cancion.mp3" preload="auto"></audio>
   </div>
 
   <canvas id="heartCanvas"></canvas>
@@ -246,6 +247,7 @@
     const maxParticles = 300;
 
     openBtn.onclick = () => {
+      document.getElementById("bgMusic").play().catch(() => {}); // intenta reproducir
       showHeartExplosion();
       openBtn.style.display = 'none';
 
