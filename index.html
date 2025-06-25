@@ -348,5 +348,18 @@
       animateParticles();
     }
   </script>
+  <audio id="bgMusic" src="cancion.mp3" preload="auto"></audio>
+  <script>
+    window.addEventListener("load", () => {
+      const audio = document.getElementById("bgMusic");
+      // Solo reproduce al hacer clic por políticas del navegador
+      document.body.addEventListener("click", () => {
+        if (audio.paused) {
+          audio.play().catch(() => {});
+        }
+      }, { once: true });
+    });
+  </script>
+
 </body>
 </html>
