@@ -86,9 +86,29 @@
       color: white;
       z-index: 10000;
     }
+    .count-box {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 30px 40px;
+      border-radius: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      text-align: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 15px rgba(255, 182, 193, 0.4);
+    }
+
+    .count-title {
+      font-size: 2em;
+      font-family: 'Great Vibes', cursive;
+      color: #ffd1e1;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
 
     #countdown {
-      font-size: 2em;
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
 
     #openBtn {
@@ -248,10 +268,11 @@
 <body>
   <div id="overlay">
     <div id="floatingHearts"></div>
-    <div id="countContainer">
-      <div>Faltan para el gran día:</div>
-      <div id="countdown">00d 00h 00m 00s</div>
-    </div>
+  <div id="countContainer" class="count-box">
+    <div class="count-title">Faltan para el gran día:</div>
+    <div id="countdown">00d 00h 00m 00s</div>
+  </div>
+
     <button id="openBtn">🎁 Abrir 🎁</button>
   </div>
 
