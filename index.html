@@ -157,11 +157,53 @@
         color: #5a0034;
         font-style: italic;
     }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff69b4;
+      transform: rotate(45deg);
+      animation: floatUp 6s linear infinite;
+      opacity: 0.8;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff69b4;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1) rotate(45deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.2) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
 
   </style>
 </head>
 <body>
   <div id="overlay">
+    <div id="floatingHearts"></div>
     <div id="countContainer">
       <div>Faltan para el gran día:</div>
       <div id="countdown">00d 00h 00m 00s</div>
@@ -357,7 +399,30 @@
         }
       }, { once: true });
     });
+    
   </script>
+  <script>
+    const floatingHearts = document.getElementById("floatingHearts");
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+      heart.style.background = ["#ff69b4", "#ff85a2", "#f06292"][Math.floor(Math.random() * 3)];
+      floatingHearts.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+
+    let heartInterval = setInterval(() => {
+      if (overlay.style.display !== "none") {
+        createHeart();
+      } else {
+        clearInterval(heartInterval);
+      }
+    }, 300);
+  </script>
+
 <audio id="bgMusic" src="cancion.mp3" preload="auto"></audio>
 
 </body>
