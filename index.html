@@ -562,13 +562,14 @@
       dias.forEach(dia => {
         const elem = document.getElementById(`adventDay${dia}`);
         if (!elem) return;
-        if (diasRestantes <= dia - 1) {
+        if (diasRestantes === dia) {
           elem.style.display = 'block';
         } else {
           elem.style.display = 'none';
         }
       });
     }
+
 
     function actualizarAdvent() {
       const now = new Date();
@@ -591,7 +592,7 @@
 
     actualizarAdvent();
   </script>
-  
+
 <audio id="bgMusic" src="cancion.mp3" preload="auto"></audio>
 
 </body>
