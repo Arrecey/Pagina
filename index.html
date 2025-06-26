@@ -197,6 +197,27 @@
         opacity: 0;
       }
     }
+    .love-text {
+      position: absolute;
+      font-size: 1.5em;
+      color: #fff;
+      font-family: 'Great Vibes', cursive;
+      animation: floatText 8s linear forwards;
+      opacity: 0.9;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    @keyframes floatText {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-120vh);
+        opacity: 0;
+      }
+    }
 
 
   </style>
@@ -417,11 +438,36 @@
     let heartInterval = setInterval(() => {
       if (overlay.style.display !== "none") {
         createHeart();
+        if (Math.random() < 0.4) createLoveText(); // 40% chance de frase flotante
       } else {
         clearInterval(heartInterval);
       }
     }, 300);
+
+    function createLoveText() {
+      const phrases = [
+        "Te amo 💖",
+        "Feliz cumple 🎉",
+        "Eres mi todo 💫",
+        "Contigo siempre 💘",
+        "Mi vida eres tú 🌹",
+        "Gracias por existir 💗",
+        "Amor eterno 💞",
+        "Mi corazón es tuyo 💓"
+      ];
+
+      const text = document.createElement("div");
+      text.className = "love-text";
+      text.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+      text.style.left = Math.random() * 90 + "vw";
+      text.style.animationDuration = (6 + Math.random() * 4) + "s";
+
+      floatingHearts.appendChild(text);
+      setTimeout(() => text.remove(), 10000);
+    }
+
   </script>
+
 
 <audio id="bgMusic" src="cancion.mp3" preload="auto"></audio>
 
