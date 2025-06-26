@@ -556,9 +556,42 @@
       }, { once: true });
     });
   </script>
+  <script>
+    function mostrarDiaAdvent(diasRestantes) {
+      const dias = [5,4,3,2,1];
+      dias.forEach(dia => {
+        const elem = document.getElementById(`adventDay${dia}`);
+        if (!elem) return;
+        if (diasRestantes <= dia - 1) {
+          elem.style.display = 'block';
+        } else {
+          elem.style.display = 'none';
+        }
+      });
+    }
 
+    function actualizarAdvent() {
+      const now = new Date();
+      const diff = targetDate - now;
+      const diasRestantes = Math.ceil(diff / (1000 * 60 * 60 * 24));
+      
+      if (diasRestantes <= 0) {
+        document.getElementById('adventContainer').style.display = 'none';
+        return;
+      }
+      
+      mostrarDiaAdvent(diasRestantes);
+      document.getElementById('adventContainer').style.display = 'block';
+    }
 
+    setInterval(() => {
+      updateCountdown();
+      actualizarAdvent();
+    }, 1000);
 
+    actualizarAdvent();
+  </script>
+  
 <audio id="bgMusic" src="cancion.mp3" preload="auto"></audio>
 
 </body>
