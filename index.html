@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Feliz cumple priss</title>
+  <title>Feliz Cumple Priss</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
@@ -218,6 +218,29 @@
         opacity: 0;
       }
     }
+    .advent-day {
+      background: #fff6fb;
+      padding: 30px;
+      border-radius: 25px;
+      box-shadow: 0 4px 15px rgba(240, 108, 155, 0.2);
+      margin-bottom: 20px;
+      text-align: center;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    .advent-day h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5em;
+      color: #a72c59;
+    }
+
+    .advent-day p {
+      font-size: 1.1em;
+      color: #5a0034;
+      max-width: 700px;
+      margin: 15px auto 0;
+    }
+
 
 
   </style>
@@ -247,6 +270,38 @@
   </header>
 
   <main style="display: none;">
+    <section id="adventContainer" style="display: none; margin-bottom: 40px;">
+      <div id="adventDay5" class="advent-day">
+        <h2>Día 1: Falta poquito 💌</h2>
+        <p>Hola amor, comienza esta cuenta regresiva hacia tu día. No podía esperar para hacer algo especial por ti...</p>
+      </div>
+
+      <div id="adventDay4" class="advent-day">
+        <h2>Día 2: ¿Te acordás de esta?</h2>
+        <img src="fotoEspecial1.jpeg" alt="Recuerdo" style="max-width: 100%; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);" />
+        <p>Un recuerdo que me hace sonreír siempre que lo veo 🥹</p>
+      </div>
+
+      <div id="adventDay3" class="advent-day">
+        <h2>Día 3: Esta canción me hace pensar en vos 🎶</h2>
+        <audio controls>
+          <source src="cancionRecuerdo.mp3" type="audio/mpeg">
+          Tu navegador no soporta el audio.
+        </audio>
+        <p>La escucho y pienso en tu sonrisa 💘</p>
+      </div>
+
+      <div id="adventDay2" class="advent-day">
+        <h2>Día 4: Una carta para vos 📝</h2>
+        <p style="white-space: pre-line;">Querida Priss:\n\nGracias por llenar mi vida de luz.\nCada momento a tu lado es un regalo.\n\nTe amo, más de lo que estas palabras pueden expresar.</p>
+      </div>
+
+      <div id="adventDay1" class="advent-day">
+        <h2>Día 5: Mañana es tu gran día 🎁</h2>
+        <p>Estoy preparando algo muy especial… ¿Estás lista para la sorpresa?</p>
+      </div>
+    </section>
+
     <section class="gallery">
       <figure><img src="foto1.jpeg" alt="Foto 1" /><figcaption>Un día especial</figcaption></figure>
       <figure><img src="foto2.jpeg" alt="Foto 2" /><figcaption>Momentos únicos</figcaption></figure>
@@ -467,6 +522,17 @@
     }
 
   </script>
+  <script>
+    window.addEventListener("load", () => {
+      const audio = document.getElementById("bgMusic");
+      document.body.addEventListener("click", () => {
+        if (audio.paused) {
+          audio.play().catch(() => {});
+        }
+      }, { once: true });
+    });
+  </script>
+
 
 
 <audio id="bgMusic" src="cancion.mp3" preload="auto"></audio>
