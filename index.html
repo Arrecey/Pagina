@@ -293,6 +293,36 @@
     .animate-slide {
       animation: slideInRightFadeOut 5s ease forwards;
     }
+  .mensaje-advent {
+    margin-top: 15px;
+    font-size: 1.3em;
+    color: #fff;
+    font-family: 'Great Vibes', cursive;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    height: 30px; /* espacio para el mensaje */
+  }
+
+  .mensaje-advent span {
+    position: absolute;
+    white-space: nowrap;
+    animation: slideLeft 6s forwards;
+    /* color y sombra para que resalte */
+    color: #fff0f5;
+    text-shadow: 1px 1px 4px #a72c59;
+  }
+
+  @keyframes slideLeft {
+    0% {
+      left: 100%;
+      opacity: 1;
+    }
+    100% {
+      left: -100%;
+      opacity: 0;
+    }
+  }
 
 
 
@@ -304,6 +334,7 @@
   <div id="countContainer" class="count-box">
     <div class="count-title">Faltan para el gran día:</div>
     <div id="countdown">00d 00h 00m 00s</div>
+    <div id="mensajeAdvent" class="mensaje-advent"></div>
   </div>
 
     <button id="openBtn">🎁 Abrir 🎁</button>
@@ -588,21 +619,19 @@
   </script>
   <script>
     function mostrarDiaAdvent(diaMostrado) {
-      for (let i = 1; i <= 3; i++) {
+      for (let i = 1; i <= 5; i++) {  // corregido para mostrar hasta día 5
         const elem = document.getElementById(`adventDay${i}`);
         if (elem) {
           if (i === diaMostrado) {
             elem.style.display = 'block';
 
-            // Solo para mensaje 1 activamos animación
             if (i === 1) {
-              elem.classList.remove('animate-slide'); // reiniciar animación
-              void elem.offsetWidth; // trigger reflow
+              elem.classList.remove('animate-slide'); 
+              void elem.offsetWidth; 
               elem.classList.add('animate-slide');
             } else {
               elem.classList.remove('animate-slide');
             }
-
           } else {
             elem.style.display = 'none';
             elem.classList.remove('animate-slide');
@@ -611,45 +640,47 @@
       }
     }
 
-
     function actualizarAdvent() {
       const now = new Date();
       const diff = targetDate - now;
       const diasRestantes = Math.floor(diff / (1000 * 60 * 60 * 24));
 
+      const mensajeAdventEl = document.getElementById('mensajeAdvent');
+
       if (diasRestantes >= 0 && diasRestantes <= 4) {
-        let diaAMostrar;
+        const diaAMostrar = 1 + (4 - diasRestantes); 
 
-        switch(diasRestantes) {
-          case 4: // 4 días → mensaje 1
-            diaAMostrar = 1;
-            break;
-          case 3: // 3 días → mensaje 2
-            diaAMostrar = 2;
-            break;
-          case 2: // 2 días → mensaje 3
-            diaAMostrar = 3;
-            break;
-          case 1: // 1 día → mensaje 2
-            diaAMostrar = 2;
-            break;
-          case 0: // 0 días → mensaje 1
-            diaAMostrar = 1;
-            break;
-          default:
-            diaAMostrar = null;
-        }
+        mostrarDiaAdvent(diaAMostrar);
+        document.getElementById('adventContainer').style.display = 'block';
+        document.getElementById('countContainer').style.display = 'block';
 
-        if (diaAMostrar) {
-          mostrarDiaAdvent(diaAMostrar);
-          document.getElementById('adventContainer').style.display = 'block';
-        } else {
-          document.getElementById('adventContainer').style.display = 'none';
-        }
+        // Mensajes para cada día
+        const mensajes = {
+          1: "Falta poquito, amor 💌",
+          2: "¿Te acordás de esta? 🥹",
+          3: "Esta canción me hace pensar en vos 🎶",
+          4: "Una carta para vos 📝",
+          5: "Mañana es tu gran día 🎁"
+        };
+
+        // Para reiniciar animación, borramos y volvemos a agregar el span
+        mensajeAdventEl.innerHTML = '';
+
+        const span = document.createElement('span');
+        span.textContent = mensajes[diaAMostrar] || '';
+
+        // Forzar reflow para reiniciar animación CSS
+        span.style.animation = 'none';
+        mensajeAdventEl.appendChild(span);
+        void span.offsetWidth; // trigger reflow
+        span.style.animation = null;
+
       } else {
         document.getElementById('adventContainer').style.display = 'none';
+        mensajeAdventEl.innerHTML = '';
       }
     }
+
 
   </script>
 
