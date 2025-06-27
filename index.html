@@ -293,46 +293,17 @@
     .animate-slide {
       animation: slideInRightFadeOut 5s ease forwards;
     }
+   /* Elimina o reemplaza el CSS anterior del mensaje por esto: */
     .mensaje-advent {
       margin-top: 15px;
       font-size: 1.3em;
       color: #fff;
       font-family: 'Great Vibes', cursive;
-      white-space: nowrap;
-      overflow: hidden;
-      position: relative;
-      height: 30px;
-      width: 100%;
-    }
-
-    .mensaje-advent span {
-      position: absolute;
-      right: 0;
-      opacity: 0;
-      animation: slideInRightFadeOut 6s forwards;
-      color: #fff0f5;
+      text-align: center;
       text-shadow: 1px 1px 4px #a72c59;
+      opacity: 0.9;
+      transition: opacity 0.5s ease;
     }
-
-    @keyframes slideInRightFadeOut {
-      0% {
-        transform: translateX(100%);
-        opacity: 0;
-      }
-      20% {
-        transform: translateX(0);
-        opacity: 1;
-      }
-      80% {
-        transform: translateX(0);
-        opacity: 1;
-      }
-      100% {
-        transform: translateX(-100%);
-        opacity: 0;
-      }
-    }
-
 
   </style>
 </head>
@@ -651,41 +622,30 @@
     function actualizarAdvent() {
       const now = new Date();
       const diff = targetDate - now;
-      const diasRestantes = Math.floor(diff / (1000 * 60 * 60 * 24)); // Días completos restantes
+      const diasRestantes = Math.floor(diff / (1000 * 60 * 60 * 24));
 
       const mensajeAdventEl = document.getElementById('mensajeAdvent');
       
-      // Mensajes para cada día (de 4 a 0 días antes)
-      const mensajes = [
-        { dias: 4, texto: "Falta poquito, amor 💌" },
-        { dias: 3, texto: "¿Te acordás de esta? 🥹" },
-        { dias: 2, texto: "Esta canción me hace pensar en vos 🎶" },
-        { dias: 1, texto: "Una carta para vos 📝" },
-        { dias: 0, texto: "Mañana es tu gran día 🎁" }
-      ];
+      // Mensajes para cada día
+      const mensajes = {
+        4: "Falta poquito, amor 💌",
+        3: "¿Te acordás de esta? 🥹",
+        2: "Esta canción me hace pensar en vos 🎶", 
+        1: "Una carta para vos 📝",
+        0: "¡Mañana es tu gran día! 🎁"
+      };
 
-      // Limpiar el mensaje anterior
-      mensajeAdventEl.innerHTML = '';
-
+      // Mostrar el mensaje correspondiente
       if (diasRestantes >= 0 && diasRestantes <= 4) {
-        // Encontrar el mensaje correspondiente
-        const mensajeObj = mensajes.find(m => m.dias === diasRestantes);
+        mensajeAdventEl.textContent = mensajes[diasRestantes] || '';
+        mensajeAdventEl.style.opacity = '1';
         
-        if (mensajeObj) {
-          const span = document.createElement('span');
-          span.textContent = mensajeObj.texto;
-          mensajeAdventEl.appendChild(span);
-          
-          // Forzar reinicio de animación
-          void span.offsetWidth; // Esto fuerza un reflow
-          span.style.animation = 'slideInRightFadeOut 6s forwards';
-        }
-
         // Mostrar el día correspondiente del advent
         const diaAMostrar = 5 - diasRestantes;
         mostrarDiaAdvent(diaAMostrar);
         document.getElementById('adventContainer').style.display = 'block';
       } else {
+        mensajeAdventEl.style.opacity = '0';
         document.getElementById('adventContainer').style.display = 'none';
       }
     }
