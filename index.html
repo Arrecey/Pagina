@@ -295,7 +295,7 @@
 
   <main style="display: none;">
     <section id="adventContainer" style="display: none; margin-bottom: 40px;">
-      <div id="adventDay5" class="advent-day">
+      <div id="adventDay1" class="advent-day">
         <h2>Día 1: Falta poquito 💌</h2>
         <p>Hola amor, comienza esta cuenta regresiva hacia tu día. No podía esperar para hacer algo especial por ti...</p>
       </div>
@@ -572,7 +572,7 @@
       const diasRestantes = Math.floor(diff / (1000 * 60 * 60 * 24));
 
       if (diasRestantes >= 0 && diasRestantes <= 4) {
-        const diaAMostrar = 5 - diasRestantes; // 4→1, 3→2, ..., 0→5
+        const diaAMostrar = diasRestantes + 1; // 4→1, 3→2, ..., 0→5
         mostrarDiaAdvent(diaAMostrar);
         document.getElementById('adventContainer').style.display = 'block';
       } else {
