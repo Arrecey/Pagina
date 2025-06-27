@@ -307,16 +307,17 @@
 
     .mensaje-advent span {
       position: absolute;
-      right: 0; /* Comienza desde la derecha */
-      animation: slideLeft 6s forwards;
+      right: 0;
+      opacity: 0;
+      animation: slideInRightFadeOut 6s forwards;
       color: #fff0f5;
       text-shadow: 1px 1px 4px #a72c59;
     }
 
-    @keyframes slideLeft {
+    @keyframes slideInRightFadeOut {
       0% {
         transform: translateX(100%);
-        opacity: 1;
+        opacity: 0;
       }
       20% {
         transform: translateX(0);
@@ -650,47 +651,45 @@
     function actualizarAdvent() {
       const now = new Date();
       const diff = targetDate - now;
-      const diasRestantes = Math.ceil(diff / (1000 * 60 * 60 * 24)); // Usamos Math.ceil para redondear hacia arriba
+      const diasRestantes = Math.floor(diff / (1000 * 60 * 60 * 24)); // Días completos restantes
 
       const mensajeAdventEl = document.getElementById('mensajeAdvent');
-
+      
       // Mensajes para cada día (de 4 a 0 días antes)
-      const mensajes = {
-        4: "Falta poquito, amor 💌",
-        3: "¿Te acordás de esta? 🥹",
-        2: "Esta canción me hace pensar en vos 🎶",
-        1: "Una carta para vos 📝",
-        0: "Mañana es tu gran día 🎁"
-      };
+      const mensajes = [
+        { dias: 4, texto: "Falta poquito, amor 💌" },
+        { dias: 3, texto: "¿Te acordás de esta? 🥹" },
+        { dias: 2, texto: "Esta canción me hace pensar en vos 🎶" },
+        { dias: 1, texto: "Una carta para vos 📝" },
+        { dias: 0, texto: "Mañana es tu gran día 🎁" }
+      ];
 
       // Limpiar el mensaje anterior
       mensajeAdventEl.innerHTML = '';
 
       if (diasRestantes >= 0 && diasRestantes <= 4) {
-        // Mostrar el contenedor de advent
-        document.getElementById('adventContainer').style.display = 'block';
+        // Encontrar el mensaje correspondiente
+        const mensajeObj = mensajes.find(m => m.dias === diasRestantes);
         
-        // Determinar qué día mostrar (5 - diasRestantes para que vaya de 1 a 5)
-        const diaAMostrar = 5 - diasRestantes;
-        mostrarDiaAdvent(diaAMostrar);
-
-        // Mostrar el mensaje flotante correspondiente
-        const mensaje = mensajes[diasRestantes];
-        if (mensaje) {
+        if (mensajeObj) {
           const span = document.createElement('span');
-          span.textContent = mensaje;
+          span.textContent = mensajeObj.texto;
           mensajeAdventEl.appendChild(span);
           
           // Forzar reinicio de animación
           void span.offsetWidth; // Esto fuerza un reflow
           span.style.animation = 'slideLeft 6s forwards';
         }
+
+        // Mostrar el día correspondiente del advent
+        const diaAMostrar = 5 - diasRestantes;
+        mostrarDiaAdvent(diaAMostrar);
+        document.getElementById('adventContainer').style.display = 'block';
       } else {
         document.getElementById('adventContainer').style.display = 'none';
       }
     }
-
-    // Llamar a actualizarAdvent inicialmente y cada segundo
+    // Llamar inicialmente y cada segundo
     actualizarAdvent();
     setInterval(actualizarAdvent, 1000);
   </script>
