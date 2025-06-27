@@ -558,23 +558,19 @@
   </script>
   <script>
     function mostrarDiaAdvent(diasRestantes) {
-      const dias = [4,3,2,1,0];
-      dias.forEach(dia => {
-        const elem = document.getElementById(`adventDay${dia}`);
-        if (!elem) return;
-        if (diasRestantes === dia) {
-          elem.style.display = 'block';
-        } else {
-          elem.style.display = 'none';
-        }
-      });
+      const diaMensaje = 5 - diasRestantes; // 4 -> 1, 3 -> 2, 2 -> 3, 1 -> 4, 0 -> 5
+      for (let i = 1; i <= 5; i++) {
+        const elem = document.getElementById(`adventDay${i}`);
+        if (!elem) continue;
+        elem.style.display = (i === diaMensaje) ? 'block' : 'none';
+      }
     }
 
 
     function actualizarAdvent() {
       const now = new Date();
       const diff = targetDate - now;
-      const diasRestantes = Math.floor(diff / (1000 * 60 * 60 * 24)) + 1;
+      const diasRestantes = Math.floor(diff / (1000 * 60 * 60 * 24));
       
       if (diasRestantes <= 0) {
         document.getElementById('adventContainer').style.display = 'none';
