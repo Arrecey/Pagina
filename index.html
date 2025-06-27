@@ -263,6 +263,36 @@
       max-width: 700px;
       margin: 15px auto 0;
     }
+    /* Contenedor del mensaje animado */
+    .advent-day {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animación de derecha a izquierda con desvanecimiento */
+    @keyframes slideInRightFadeOut {
+      0% {
+        opacity: 0;
+        transform: translateX(100%);
+      }
+      20% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      80% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+    }
+
+    /* Clase para activar la animación */
+    .animate-slide {
+      animation: slideInRightFadeOut 5s ease forwards;
+    }
 
 
 
@@ -561,10 +591,26 @@
       for (let i = 1; i <= 3; i++) {
         const elem = document.getElementById(`adventDay${i}`);
         if (elem) {
-          elem.style.display = (i === diaMostrado) ? 'block' : 'none';
+          if (i === diaMostrado) {
+            elem.style.display = 'block';
+
+            // Solo para mensaje 1 activamos animación
+            if (i === 1) {
+              elem.classList.remove('animate-slide'); // reiniciar animación
+              void elem.offsetWidth; // trigger reflow
+              elem.classList.add('animate-slide');
+            } else {
+              elem.classList.remove('animate-slide');
+            }
+
+          } else {
+            elem.style.display = 'none';
+            elem.classList.remove('animate-slide');
+          }
         }
       }
     }
+
 
     function actualizarAdvent() {
       const now = new Date();
