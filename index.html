@@ -421,8 +421,11 @@
     const particles = [];
     const maxParticles = 300;
 
-    openBtn.onclick = () => {
-      document.getElementById("bgMusic").play().catch(() => {}); // intenta reproducir
+      openBtn.onclick = () => {
+      // Reproducir la música cuando se hace clic en el botón
+      const audio = document.getElementById("bgMusic");
+      audio.play().catch(e => console.log("Error al reproducir audio:", e));
+      
       showHeartExplosion();
       openBtn.style.display = 'none';
 
@@ -523,17 +526,6 @@
       animateParticles();
     }
   </script>
-<!--<script>
-    window.addEventListener("load", () => {
-      const audio = document.getElementById("bgMusic");
-      // Solo reproduce al hacer clic por políticas del navegador
-      document.body.addEventListener("click", () => {
-        if (audio.paused) {
-          audio.play().catch(() => {});
-        }
-      }, { once: true });
-    }); -->
-    
   </script>
   <script>
     const floatingHearts = document.getElementById("floatingHearts");
