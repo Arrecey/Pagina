@@ -396,7 +396,7 @@
   </main>
   
   <script>
-    const targetDate = new Date("2025-07-01T14:32:00");
+    const targetDate = new Date("2025-07-01T12:32:00");
     const countdownEl = document.getElementById("countdown");
     const overlay = document.getElementById("overlay");
     const openBtn = document.getElementById("openBtn");
@@ -421,15 +421,14 @@
     const particles = [];
     const maxParticles = 300;
 
-      openBtn.onclick = () => {
-      // Reproducir la música cuando se hace clic en el botón
+    openBtn.onclick = () => {
+      // Reproducir la música solo al hacer clic en el botón
       const audio = document.getElementById("bgMusic");
       audio.play().catch(e => console.log("Error al reproducir audio:", e));
       
       showHeartExplosion();
       openBtn.style.display = 'none';
 
-      // Explota 1 segundo antes de terminar (a los 9 seg)
       setTimeout(() => {
         exploding = true;
         particles.forEach(p => {
@@ -451,7 +450,6 @@
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
-
     const canvas = document.getElementById('heartCanvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
