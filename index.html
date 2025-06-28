@@ -505,25 +505,33 @@
       const diasRestantes = Math.floor(diff / (1000 * 60 * 60 * 24));
 
       const mensajeAdventEl = document.getElementById('mensajeAdvent');
-      
+
       // Mensajes para cada día
       const mensajes = {
         4: "Falta poquito, amor 💌",
         3: "¿Te acordás de esta? 🥹",
-        2: "Esta canción me hace pensar en vos 🎶", 
+        2: "Esta canción me hace pensar en vos 🎶",
         1: "Una carta para vos 📝",
         0: "¡Mañana es tu gran día! 🎁"
       };
 
-    if (diasRestantes >= 0 && diasRestantes <= 4) {
-      mensajeAdventEl.textContent = mensajes[diasRestantes] || '';
-      mensajeAdventEl.style.opacity = '1';
-        // Mostrar imagen solo en el día 2
+      if (diasRestantes >= 0 && diasRestantes <= 4) {
+        // Limpio el contenido para evitar duplicados
+        mensajeAdventEl.innerHTML = '';
+
+        // Crear un párrafo para el texto del mensaje
+        const texto = document.createElement('p');
+        texto.textContent = mensajes[diasRestantes] || '';
+        mensajeAdventEl.appendChild(texto);
+
+        mensajeAdventEl.style.opacity = '1';
+
+        // Mostrar imagen solo en el día 2 (diasRestantes === 3)
         if (diasRestantes === 3) {
           if (!document.getElementById("imagenDia2")) {
             const img = document.createElement("img");
             img.id = "imagenDia2";
-            img.src = "fotodia2.jpeg"; // <-- reemplace por su nombre real de imagen
+            img.src = "foto_dia2.jpeg";  // Cambie esto por la ruta correcta de su imagen
             img.alt = "Recuerdo especial";
             img.style.maxWidth = "200px";
             img.style.marginTop = "15px";
@@ -535,24 +543,27 @@
           if (imgExistente) imgExistente.remove();
         }
 
-
-      // Insertar audio solo en el día 3
-      if (diasRestantes === 2) {
-        if (!document.getElementById("audioDia3")) {
-          const audio = document.createElement("audio");
-          audio.id = "audioDia3";
-          audio.controls = true;
-          audio.innerHTML = `<source src="cancion2.mp3" type="audio/mpeg">Tu navegador no soporta el audio.`;
-          mensajeAdventEl.appendChild(audio);
+        // Insertar audio solo en el día 3 (diasRestantes === 2)
+        if (diasRestantes === 2) {
+          if (!document.getElementById("audioDia3")) {
+            const audio = document.createElement("audio");
+            audio.id = "audioDia3";
+            audio.controls = true;
+            audio.innerHTML = `<source src="cancion2.mp3" type="audio/mpeg">Tu navegador no soporta el audio.`;
+            mensajeAdventEl.appendChild(audio);
+          }
+        } else {
+          const audioExistente = document.getElementById("audioDia3");
+          if (audioExistente) audioExistente.remove();
         }
-      } else {
-        const audioExistente = document.getElementById("audioDia3");
-        if (audioExistente) audioExistente.remove();
-      }
 
-      const diaAMostrar = 5 - diasRestantes;
-      mostrarDiaAdvent(diaAMostrar);
-      document.getElementById('adventContainer').style.display = 'block';
+        const diaAMostrar = 5 - diasRestantes;
+        mostrarDiaAdvent(diaAMostrar);
+        document.getElementById('adventContainer').style.display = 'block';
+      } else {
+        mensajeAdventEl.style.opacity = '0';
+        mensajeAdventEl.innerHTML = '';
+        document.getElementById('adventContainer').style.display = 'none';
       }
     }
 
