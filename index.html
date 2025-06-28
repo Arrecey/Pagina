@@ -321,7 +321,7 @@
   </main>
   
   <script>
-    const targetDate = new Date("2025-06-30T14:32:00");
+    const targetDate = new Date("2025-07-01T14:32:00");
     const countdownEl = document.getElementById("countdown");
     const overlay = document.getElementById("overlay");
     const openBtn = document.getElementById("openBtn");
@@ -515,9 +515,26 @@
         0: "¡Mañana es tu gran día! 🎁"
       };
 
-     if (diasRestantes >= 0 && diasRestantes <= 4) {
+    if (diasRestantes >= 0 && diasRestantes <= 4) {
       mensajeAdventEl.textContent = mensajes[diasRestantes] || '';
       mensajeAdventEl.style.opacity = '1';
+        // Mostrar imagen solo en el día 2
+        if (diasRestantes === 3) {
+          if (!document.getElementById("imagenDia2")) {
+            const img = document.createElement("img");
+            img.id = "imagenDia2";
+            img.src = "fotodia2.jpeg"; // <-- reemplace por su nombre real de imagen
+            img.alt = "Recuerdo especial";
+            img.style.maxWidth = "200px";
+            img.style.marginTop = "15px";
+            img.style.borderRadius = "15px";
+            mensajeAdventEl.appendChild(img);
+          }
+        } else {
+          const imgExistente = document.getElementById("imagenDia2");
+          if (imgExistente) imgExistente.remove();
+        }
+
 
       // Insertar audio solo en el día 3
       if (diasRestantes === 2) {
