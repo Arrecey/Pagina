@@ -446,11 +446,35 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       exploding = false;
-      particles.length = 0; // Limpiar partículas
+      particles.length = 0;
       document.getElementById('heartCanvas').style.display = 'block';
       document.getElementById('heartMessage').style.display = 'block';
+
+      // Fase 1: corazón estático
+      for (let i = 0; i < 300; i++) {
+        const t = Math.random() * Math.PI * 2;
+        const pos = heart(t);
+        const p = new Particle(
+          canvas.width / 2 + pos.x * 20,
+          canvas.height / 2 + pos.y * 25 - 100
+        );
+        p.speedX = 0;
+        p.speedY = 0;
+        particles.push(p);
+      }
+
       animateParticles();
+
+      // Fase 2: después de 3 segundos explota
+      setTimeout(() => {
+        exploding = true;
+        particles.forEach(p => {
+          p.speedX = (Math.random() - 0.5) * 15;
+          p.speedY = (Math.random() - 0.5) * 15;
+        });
+      }, 3000);
     }
+
   </script>
   </script>
   <script>
